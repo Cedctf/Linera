@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Geist, Geist_Mono } from "next/font/google";
 import Card from "../components/Card";
 
@@ -67,6 +67,8 @@ export default function Blackjack() {
   const [dealerHand, setDealerHand] = useState([]);
   const [deck, setDeck] = useState(createDeck());
   const [gameStarted, setGameStarted] = useState(false);
+  const [playerStood, setPlayerStood] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   const dealInitialCards = () => {
     // Create and shuffle a fresh deck
@@ -84,19 +86,21 @@ export default function Blackjack() {
   };
 
   const hitPlayer = () => {
-    if (deck.length > 0) {
+    if (deck.length > 0 && !gameOver) {
       const newCard = deck[0];
-      setPlayerHand([...playerHand, newCard]);
+      const newPlayerHand = [...playerHand, newCard];
+      setPlayerHand(newPlayerHand);
       setDeck(deck.slice(1));
+      
+      // Check if player busts
+      if (calculateHandValue(newPlayerHand) > 21) {
+        setGameOver(true);
+      }
     }
   };
 
-  const hitDealer = () => {
-    if (deck.length > 0) {
-      const newCard = deck[0];
-      setDealerHand([...dealerHand, newCard]);
-      setDeck(deck.slice(1));
-    }
+  const stand = () => {
+    setPlayerStood(true);
   };
 
   const resetGame = () => {
@@ -104,12 +108,56 @@ export default function Blackjack() {
     setDealerHand([]);
     setDeck(createDeck());
     setGameStarted(false);
+    setPlayerStood(false);
+    setGameOver(false);
   };
+
+  // Automatic dealer play when player stands
+  useEffect(() => {
+    if (playerStood && !gameOver && gameStarted) {
+      const dealerValue = calculateHandValue(dealerHand);
+      
+      // Dealer must hit on less than 17, stay on all 17s
+      if (dealerValue < 17 && deck.length > 0) {
+        const timer = setTimeout(() => {
+          const newCard = deck[0];
+          const newDealerHand = [...dealerHand, newCard];
+          setDealerHand(newDealerHand);
+          setDeck(deck.slice(1));
+          
+          // Check if dealer busts
+          if (calculateHandValue(newDealerHand) > 21) {
+            setGameOver(true);
+          }
+        }, 1000); // 1 second delay between dealer hits for visual effect
+        
+        return () => clearTimeout(timer);
+      } else if (dealerValue >= 17) {
+        setGameOver(true);
+      }
+    }
+  }, [playerStood, dealerHand, gameOver, gameStarted, deck]);
 
   const playerValue = calculateHandValue(playerHand);
   const dealerValue = calculateHandValue(dealerHand);
   const playerBust = playerValue > 21;
   const dealerBust = dealerValue > 21;
+
+  // Determine winner
+  let result = '';
+  if (gameOver) {
+    if (playerBust) {
+      result = 'Dealer Wins - You Bust!';
+    } else if (dealerBust) {
+      result = 'You Win - Dealer Bust!';
+    } else if (playerValue > dealerValue) {
+      result = 'You Win!';
+    } else if (dealerValue > playerValue) {
+      result = 'Dealer Wins!';
+    } else {
+      result = 'Push (Tie)';
+    }
+  }
 
   return (
     <div
@@ -147,17 +195,26 @@ export default function Blackjack() {
                 <p className="text-green-300 text-lg">No cards dealt</p>
               )}
             </div>
-            {gameStarted && (
-              <button
-                onClick={hitDealer}
-                disabled={dealerBust || deck.length === 0}
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
-              >
-                Hit Dealer
-              </button>
+            {playerStood && !gameOver && dealerValue < 17 && (
+              <div className="text-yellow-400 font-semibold animate-pulse">
+                Dealer is playing...
+              </div>
             )}
           </div>
         </div>
+
+        {/* Game Result */}
+        {gameOver && result && (
+          <div className="text-center">
+            <div className={`text-3xl font-bold ${
+              result.includes('You Win') ? 'text-green-400' : 
+              result.includes('Push') ? 'text-yellow-400' : 
+              'text-red-400'
+            }`}>
+              {result}
+            </div>
+          </div>
+        )}
 
         {/* Action Buttons */}
         <div className="flex gap-4">
@@ -168,12 +225,19 @@ export default function Blackjack() {
             >
               Deal Cards
             </button>
-          ) : (
+          ) : gameOver ? (
             <button
               onClick={resetGame}
               className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-xl rounded-lg shadow-lg transform hover:scale-105 transition-all"
             >
               New Game
+            </button>
+          ) : (
+            <button
+              onClick={resetGame}
+              className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg shadow-lg transform hover:scale-105 transition-all"
+            >
+              Reset
             </button>
           )}
         </div>
@@ -206,14 +270,22 @@ export default function Blackjack() {
                 <p className="text-green-300 text-lg">No cards dealt</p>
               )}
             </div>
-            {gameStarted && (
-              <button
-                onClick={hitPlayer}
-                disabled={playerBust || deck.length === 0}
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
-              >
-                Hit Me
-              </button>
+            {gameStarted && !gameOver && !playerStood && (
+              <div className="flex gap-4">
+                <button
+                  onClick={hitPlayer}
+                  disabled={playerBust || deck.length === 0}
+                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                >
+                  Hit
+                </button>
+                <button
+                  onClick={stand}
+                  className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors"
+                >
+                  Stand
+                </button>
+              </div>
             )}
           </div>
         </div>
