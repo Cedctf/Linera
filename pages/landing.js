@@ -119,36 +119,10 @@ export default function Landing() {
                   </div>
                 </div>
               </div>
-
-              {/* Features */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8">
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-green-500/5 border border-green-500/10">
-                  <div className="w-6 h-6 mt-1 text-green-400">
-                    <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Provably Fair</h3>
-                    <p className="text-sm text-gray-400 mt-1">Blockchain-verified results</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-green-500/5 border border-green-500/10">
-                  <div className="w-6 h-6 mt-1 text-green-400">
-                    <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Instant Payouts</h3>
-                    <p className="text-sm text-gray-400 mt-1">Withdraw anytime, instantly</p>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Right Side - CardSwap Component */}
-            <div className="relative h-[700px] md:h-[800px] w-full -mt-150">
+            <div className="relative h-[700px] md:h-[800px] w-full -mt-110">
               <CardSwap
                 width={480}
                 height={420}
@@ -188,19 +162,6 @@ export default function Landing() {
             </div>
           </div>
         </main>
-
-        {/* Footer Section */}
-        <section className="max-w-7xl mx-auto px-6 py-12 mt-20 border-t border-green-900/30">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold">Ready to Start?</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Join thousands of players already winning on Linera Casino. Connect your wallet and start playing in seconds.
-            </p>
-            <button className="mt-6 px-10 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-green-500/30">
-              Get Started Now
-            </button>
-          </div>
-        </section>
       </div>
     </div>
   );
