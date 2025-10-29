@@ -1,5 +1,6 @@
 import React from 'react';
 import CardSwap, { Card } from '../components/CardSwap';
+import CountUp from '../components/CountUp';
 
 export default function Landing() {
   const games = [
@@ -84,28 +85,38 @@ export default function Landing() {
                 and complete transparency on the blockchain.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 max-md:justify-center">
-                <button className="px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-green-500/30">
-                  Start Playing
-                </button>
-                <button className="px-8 py-4 border-2 border-green-500 hover:bg-green-500/10 rounded-lg font-bold text-lg transition-all">
-                  Learn More
-                </button>
-              </div>
+              {/* Buttons and Stats Section */}
+              <div className="space-y-10">
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 max-md:justify-center">
+                  <button className="px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-green-500/30">
+                    Start Playing
+                  </button>
+                  <button className="px-8 py-4 border-2 border-green-500 hover:bg-green-500/10 rounded-lg font-bold text-lg transition-all">
+                    Learn More
+                  </button>
+                </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 max-md:max-w-md max-md:mx-auto">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400">$2.5M+</div>
-                  <div className="text-sm text-gray-500 mt-1">Total Payouts</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400">15K+</div>
-                  <div className="text-sm text-gray-500 mt-1">Active Players</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400">99.9%</div>
-                  <div className="text-sm text-gray-500 mt-1">Uptime</div>
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-6 max-md:max-w-md max-md:mx-auto">
+                  <div className="text-left">
+                    <div className="text-3xl font-bold text-green-400">
+                      $<CountUp to={2.5} duration={2} className="text-3xl font-bold text-green-400" />M+
+                    </div>
+                    <div className="text-sm text-gray-500 mt-1">Total Payouts</div>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-3xl font-bold text-green-400">
+                      <CountUp to={15} duration={2} className="text-3xl font-bold text-green-400" />K+
+                    </div>
+                    <div className="text-sm text-gray-500 mt-1">Active Players</div>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-3xl font-bold text-green-400">
+                      <CountUp to={99.7} duration={2} className="text-3xl font-bold text-green-400" />%
+                    </div>
+                    <div className="text-sm text-gray-500 mt-1">Uptime</div>
+                  </div>
                 </div>
               </div>
 
