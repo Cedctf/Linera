@@ -4,6 +4,7 @@ import { Dices } from "lucide-react";
 export default function Header({ border, boxShadow }) {
   return (
     <nav className="relative z-50 flex items-center justify-between px-8 py-6">
+      {/* Logo - Left Side */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -16,11 +17,12 @@ export default function Header({ border, boxShadow }) {
         </span>
       </motion.div>
 
+      {/* Navigation Links - Centered */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="hidden md:flex items-center gap-8"
+        className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2"
       >
         <a
           href="#games"
@@ -42,6 +44,7 @@ export default function Header({ border, boxShadow }) {
         </a>
       </motion.div>
 
+      {/* Connect Wallet Button - Right Side */}
       <motion.button
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
