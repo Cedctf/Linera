@@ -279,6 +279,110 @@ export default function Web3CasinoLanding() {
         </div>
       </div>
 
+      {/* Featured Games Section */}
+      <div className="relative z-10 px-4 md:px-6 py-20">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            custom={5}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Featured Games
+            </h2>
+            <p className="text-lg text-white/60">
+              Choose from our collection of provably fair casino classics
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Blackjack - Available */}
+            <motion.div
+              custom={6}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              onClick={handleStartPlaying}
+              className="group relative bg-black border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-emerald-400/50 transition-all hover:scale-105"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=400')] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              </div>
+              <div className="p-6 bg-black">
+                <h3 className="text-2xl font-bold text-white mb-2">Blackjack</h3>
+                <p className="text-white/60 text-sm">Beat the dealer with classic 21</p>
+              </div>
+            </motion.div>
+
+            {/* Poker - Coming Soon */}
+            <motion.div
+              custom={7}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="group relative bg-black border border-white/10 rounded-2xl overflow-hidden opacity-60"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541278107931-e006523892df?w=400')] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute top-4 right-4 px-3 py-1 bg-emerald-500/90 rounded-full z-10">
+                  <span className="text-xs font-semibold text-white">Coming Soon</span>
+                </div>
+              </div>
+              <div className="p-6 bg-black">
+                <h3 className="text-2xl font-bold text-white mb-2">Poker</h3>
+                <p className="text-white/60 text-sm">Texas Hold'em tournaments</p>
+              </div>
+            </motion.div>
+
+            {/* Baccarat - Coming Soon */}
+            <motion.div
+              custom={8}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="group relative bg-black border border-white/10 rounded-2xl overflow-hidden opacity-60"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=400')] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute top-4 right-4 px-3 py-1 bg-emerald-500/90 rounded-full z-10">
+                  <span className="text-xs font-semibold text-white">Coming Soon</span>
+                </div>
+              </div>
+              <div className="p-6 bg-black">
+                <h3 className="text-2xl font-bold text-white mb-2">Baccarat</h3>
+                <p className="text-white/60 text-sm">High stakes elegance</p>
+              </div>
+            </motion.div>
+
+            {/* Roulette - Coming Soon */}
+            <motion.div
+              custom={9}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="group relative bg-black border border-white/10 rounded-2xl overflow-hidden opacity-60"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516900557549-41557d405adf?w=400')] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute top-4 right-4 px-3 py-1 bg-emerald-500/90 rounded-full z-10">
+                  <span className="text-xs font-semibold text-white">Coming Soon</span>
+                </div>
+              </div>
+              <div className="p-6 bg-black">
+                <h3 className="text-2xl font-bold text-white mb-2">Roulette</h3>
+                <p className="text-white/60 text-sm">Spin the wheel of fortune</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom gradient overlay */}
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0f0a] to-transparent pointer-events-none" />
     </motion.div>
