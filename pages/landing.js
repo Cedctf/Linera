@@ -5,23 +5,23 @@ export default function Landing() {
   const games = [
     { 
       name: 'Blackjack', 
-      image: 'https://images.unsplash.com/photo-1611630378451-f1e7ffad7ab2?w=800&q=80', 
-      description: 'Beat the dealer to 21' 
-    },
-    { 
-      name: 'Baccarat', 
-      image: 'https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=800&q=80', 
-      description: 'Predict the winning hand' 
-    },
-    { 
-      name: 'Roulette', 
-      image: 'https://images.unsplash.com/photo-1594221708779-94832f4320d1?w=800&q=80', 
-      description: 'Spin and win big' 
+      image: '/games/blackjack.jpg', 
+      description: 'Beat the dealer with classic 21'
     },
     { 
       name: 'Poker', 
-      image: 'https://images.unsplash.com/photo-1541278107931-e006523892df?w=800&q=80', 
-      description: 'Show your poker face' 
+      image: '/games/poker.jpg', 
+      description: 'Texas Hold\'em tournaments'
+    },
+    { 
+      name: 'Baccarat', 
+      image: '/games/baccarat.jpg', 
+      description: 'High stakes elegance'
+    },
+    { 
+      name: 'Roulette', 
+      image: '/games/roulette.jpg', 
+      description: 'Spin the wheel of fortune'
     }
   ];
 
@@ -149,28 +149,23 @@ export default function Landing() {
                 easing="elastic"
               >
                 {games.map((game, index) => (
-                  <Card key={index} customClass="overflow-hidden shadow-2xl shadow-green-500/20 border-2 border-green-500/30">
+                  <Card key={index} customClass="overflow-hidden shadow-2xl shadow-green-500/20 border border-green-500/20 cursor-pointer">
                     <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black flex flex-col relative group">
                       {/* Game Image */}
-                      <div className="relative w-full h-[70%]">
+                      <div className="relative w-full h-full">
                         <img
                           src={game.image}
                           alt={game.name}
                           className="w-full h-full object-cover"
                         />
                         {/* Gradient Overlay on Image */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
                       </div>
                       
                       {/* Game Info */}
-                      <div className="absolute bottom-0 w-full p-6 z-10">
-                        <h3 className="text-3xl font-bold mb-2 text-white">{game.name}</h3>
-                        <p className="text-gray-300 text-center mb-4">{game.description}</p>
-                        
-                        {/* Play Button */}
-                        <button className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg shadow-green-500/30">
-                          Play Now
-                        </button>
+                      <div className="absolute bottom-0 w-full p-8 z-10">
+                        <h3 className="text-4xl font-bold mb-2 text-white">{game.name}</h3>
+                        <p className="text-gray-300 text-lg">{game.description}</p>
                       </div>
 
                       {/* Hover Glow Effect */}
