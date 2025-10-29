@@ -161,127 +161,126 @@ export default function Blackjack() {
 
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} min-h-screen bg-gradient-to-br from-green-800 to-green-950 font-sans`}
+      className={`${geistSans.className} ${geistMono.className} h-screen overflow-hidden bg-gradient-to-br from-green-800 to-green-950 font-sans`}
     >
-      <main className="flex min-h-screen flex-col items-center gap-8 py-12 px-8">
+      <main className="flex h-screen flex-col items-center justify-center gap-3 py-4 px-4">
         {/* Title */}
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-white mb-2">Blackjack</h1>
-          <p className="text-green-200 text-lg">Try to get as close to 21 as possible!</p>
+          <h1 className="text-3xl font-bold text-white mb-1">Blackjack</h1>
+          <p className="text-green-200 text-sm">Try to get as close to 21 as possible!</p>
         </div>
 
         {/* Dealer's Hand */}
-        <div className="w-full max-w-4xl bg-green-900/50 rounded-lg p-6 backdrop-blur-sm border border-green-700/50">
-          <div className="flex flex-col items-center gap-4">
+        <div className="w-full max-w-4xl bg-green-900/50 rounded-lg p-3 backdrop-blur-sm border border-green-700/50">
+          <div className="flex flex-col items-center gap-2">
             <div className="flex items-center justify-between w-full">
-              <h2 className="text-2xl font-semibold text-white">Dealer's Hand</h2>
+              <h2 className="text-lg font-semibold text-white">Dealer's Hand</h2>
               <div className="text-right">
-                <div className="text-xl font-bold text-white">
+                <div className="text-lg font-bold text-white">
                   {dealerHand.length > 0 ? dealerValue : '-'}
                 </div>
                 {dealerBust && (
-                  <div className="text-red-400 font-semibold">BUST!</div>
+                  <div className="text-red-400 text-sm font-semibold">BUST!</div>
                 )}
               </div>
             </div>
-            <div className="flex flex-wrap gap-4 justify-center min-h-[180px] items-center">
+            <div className="flex flex-wrap gap-2 justify-center min-h-[120px] items-center">
               {dealerHand.length > 0 ? (
                 dealerHand.map((card, index) => (
                   <div key={`${card.id}-${index}`} className="transform hover:scale-105 transition-transform">
-                    <Card suit={card.suit} value={card.value} width={120} height={168} />
+                    <Card suit={card.suit} value={card.value} width={80} height={112} />
                   </div>
                 ))
               ) : (
-                <p className="text-green-300 text-lg">No cards dealt</p>
+                <p className="text-green-300 text-sm">No cards dealt</p>
               )}
             </div>
             {playerStood && !gameOver && dealerValue < 17 && (
-              <div className="text-yellow-400 font-semibold animate-pulse">
+              <div className="text-yellow-400 text-sm font-semibold animate-pulse">
                 Dealer is playing...
               </div>
             )}
           </div>
         </div>
 
-        {/* Game Result */}
-        {gameOver && result && (
-          <div className="text-center">
-            <div className={`text-3xl font-bold ${
+        {/* Game Result & Action Buttons */}
+        <div className="flex flex-col items-center gap-2">
+          {gameOver && result && (
+            <div className={`text-xl font-bold ${
               result.includes('You Win') ? 'text-green-400' : 
               result.includes('Push') ? 'text-yellow-400' : 
               'text-red-400'
             }`}>
               {result}
             </div>
-          </div>
-        )}
-
-        {/* Action Buttons */}
-        <div className="flex gap-4">
-          {!gameStarted ? (
-            <button
-              onClick={dealInitialCards}
-              className="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-xl rounded-lg shadow-lg transform hover:scale-105 transition-all"
-            >
-              Deal Cards
-            </button>
-          ) : gameOver ? (
-            <button
-              onClick={resetGame}
-              className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-xl rounded-lg shadow-lg transform hover:scale-105 transition-all"
-            >
-              New Game
-            </button>
-          ) : (
-            <button
-              onClick={resetGame}
-              className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg shadow-lg transform hover:scale-105 transition-all"
-            >
-              Reset
-            </button>
           )}
+          
+          <div className="flex gap-3">
+            {!gameStarted ? (
+              <button
+                onClick={dealInitialCards}
+                className="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg rounded-lg shadow-lg transform hover:scale-105 transition-all"
+              >
+                Deal Cards
+              </button>
+            ) : gameOver ? (
+              <button
+                onClick={resetGame}
+                className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg transform hover:scale-105 transition-all"
+              >
+                New Game
+              </button>
+            ) : (
+              <button
+                onClick={resetGame}
+                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-semibold rounded-lg shadow-lg transform hover:scale-105 transition-all"
+              >
+                Reset
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Player's Hand */}
-        <div className="w-full max-w-4xl bg-green-900/50 rounded-lg p-6 backdrop-blur-sm border border-green-700/50">
-          <div className="flex flex-col items-center gap-4">
+        <div className="w-full max-w-4xl bg-green-900/50 rounded-lg p-3 backdrop-blur-sm border border-green-700/50">
+          <div className="flex flex-col items-center gap-2">
             <div className="flex items-center justify-between w-full">
-              <h2 className="text-2xl font-semibold text-white">Your Hand</h2>
+              <h2 className="text-lg font-semibold text-white">Your Hand</h2>
               <div className="text-right">
-                <div className="text-xl font-bold text-white">
+                <div className="text-lg font-bold text-white">
                   {playerHand.length > 0 ? playerValue : '-'}
                 </div>
                 {playerBust && (
-                  <div className="text-red-400 font-semibold">BUST!</div>
+                  <div className="text-red-400 text-sm font-semibold">BUST!</div>
                 )}
                 {playerValue === 21 && !playerBust && (
-                  <div className="text-yellow-400 font-semibold">BLACKJACK!</div>
+                  <div className="text-yellow-400 text-sm font-semibold">BLACKJACK!</div>
                 )}
               </div>
             </div>
-            <div className="flex flex-wrap gap-4 justify-center min-h-[180px] items-center">
+            <div className="flex flex-wrap gap-2 justify-center min-h-[120px] items-center">
               {playerHand.length > 0 ? (
                 playerHand.map((card, index) => (
                   <div key={`${card.id}-${index}`} className="transform hover:scale-105 transition-transform">
-                    <Card suit={card.suit} value={card.value} width={120} height={168} />
+                    <Card suit={card.suit} value={card.value} width={80} height={112} />
                   </div>
                 ))
               ) : (
-                <p className="text-green-300 text-lg">No cards dealt</p>
+                <p className="text-green-300 text-sm">No cards dealt</p>
               )}
             </div>
             {gameStarted && !gameOver && !playerStood && (
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <button
                   onClick={hitPlayer}
                   disabled={playerBust || deck.length === 0}
-                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
                 >
                   Hit
                 </button>
                 <button
                   onClick={stand}
-                  className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors"
+                  className="px-5 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors"
                 >
                   Stand
                 </button>
@@ -293,7 +292,7 @@ export default function Blackjack() {
         {/* Game Info */}
         {gameStarted && (
           <div className="text-center text-green-200">
-            <p className="text-sm">Cards remaining in deck: {deck.length}</p>
+            <p className="text-xs">Cards remaining: {deck.length}</p>
           </div>
         )}
       </main>
