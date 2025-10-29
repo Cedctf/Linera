@@ -137,10 +137,10 @@ export default function Landing() {
             </div>
 
             {/* Right Side - CardSwap Component */}
-            <div className="relative h-[700px] md:h-[800px] w-full -mt-90">
+            <div className="relative h-[700px] md:h-[800px] w-full -mt-150">
               <CardSwap
                 width={480}
-                height={580}
+                height={420}
                 cardDistance={50}
                 verticalDistance={60}
                 delay={3000}
