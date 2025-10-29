@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import CardSwap, { Card } from '../components/CardSwap';
 import CountUp from '../components/CountUp';
 
@@ -89,9 +90,11 @@ export default function Home() {
               <div className="space-y-10">
                 {/* Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 max-md:justify-center">
-                  <button className="px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-green-500/30">
-                    Start Playing
-                  </button>
+                  <Link href="/blackjack">
+                    <button className="px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-green-500/30">
+                      Start Playing
+                    </button>
+                  </Link>
                   <button className="px-8 py-4 border-2 border-green-500 hover:bg-green-500/10 rounded-lg font-bold text-lg transition-all">
                     Learn More
                   </button>
