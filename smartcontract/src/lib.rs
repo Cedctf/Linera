@@ -9,7 +9,7 @@ pub struct SmartcontractAbi;
 
 impl ContractAbi for SmartcontractAbi {
     type Operation = Operation;
-    type Response = ();
+    type Response = String;
 }
 
 impl ServiceAbi for SmartcontractAbi {
@@ -19,5 +19,10 @@ impl ServiceAbi for SmartcontractAbi {
 
 #[derive(Debug, Deserialize, Serialize, GraphQLMutationRoot)]
 pub enum Operation {
-    Increment { value: u64 },
+    /// Start a new blackjack game with a bet
+    StartGame { bet_amount: u64 },
+    /// Hit - draw another card
+    Hit,
+    /// Stay - end turn and resolve game
+    Stay,
 }
