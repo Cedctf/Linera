@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import CardSwap, { Card } from '../components/CardSwap';
 import CountUp from '../components/CountUp';
 
@@ -47,11 +48,17 @@ export default function Home() {
         <header className="border-b border-green-900/30 backdrop-blur-sm bg-black/30">
           <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-xl">L</span>
+              <div className="w-10 h-10 rounded-lg overflow-hidden">
+                <Image 
+                  src="/LineraBet.png" 
+                  alt="LineraBet Logo" 
+                  width={40} 
+                  height={40}
+                  className="object-cover"
+                />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
-                Linera Casino
+                LineraBet
               </span>
             </div>
             <nav className="hidden md:flex space-x-8">
